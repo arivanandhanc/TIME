@@ -8,7 +8,7 @@ export const SITE = {
   locale: 'en_US',
   twitter: '@arivanandhan',
   author: 'Arivanandhan',
-  themeColor: '#426089',
+  themeColor: '#0a0a0a',
 } as const;
 
 export interface ToolMeta {

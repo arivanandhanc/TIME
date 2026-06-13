@@ -17,12 +17,19 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="border-b border-brand-100 bg-gradient-to-b from-brand-50/60 to-white dark:border-white/5 dark:from-white/[0.03] dark:to-transparent">
-        <div className="container py-16 text-center sm:py-24">
-          <h1 className="mx-auto max-w-3xl text-3xl font-bold tracking-tight sm:text-5xl">
-            Time Tools for <span className="text-brand-600 dark:text-brand-300">Global Teams</span>
+      <section className="relative overflow-hidden border-b border-brand-100 bg-gradient-to-b from-brand-50/60 to-white dark:border-white/5 dark:from-white/[0.03] dark:to-transparent">
+        {/* amber glow */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-0 h-72 w-[42rem] -translate-x-1/2 rounded-full opacity-40 blur-3xl"
+          style={{ background: 'radial-gradient(closest-side, rgba(251,191,36,0.35), transparent)' }}
+        />
+        <div className="container relative py-16 text-center sm:py-24">
+          <p className="eyebrow mb-5 justify-center">⏱ Free · No sign-up · Works offline</p>
+          <h1 className="mx-auto max-w-3xl text-4xl font-extrabold tracking-tight sm:text-6xl">
+            Time Tools for <span className="text-accent">Global Teams</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-brand-500">
+          <p className="mx-auto mt-5 max-w-xl text-brand-500">
             Convert timezones, plan meetings across countries, and find overlapping working hours —
             free, fast, and private. Everything runs in your browser.
           </p>
@@ -55,7 +62,7 @@ export default function HomePage() {
         <div className="container">
           <div className="mb-8 flex items-end justify-between">
             <h2 className="text-2xl font-bold tracking-tight">More time utilities</h2>
-            <Link href="/tools" className="text-sm text-brand-600 hover:underline dark:text-brand-300">View all →</Link>
+            <Link href="/tools" className="text-sm text-accent hover:text-accent-600">View all →</Link>
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {TOOLS.filter((t) => !t.featured).map((t) => (
@@ -94,7 +101,7 @@ export default function HomePage() {
         <div className="container">
           <div className="mb-8 flex items-end justify-between">
             <h2 className="text-2xl font-bold tracking-tight">From the blog</h2>
-            <Link href="/blog" className="text-sm text-brand-600 hover:underline dark:text-brand-300">All articles →</Link>
+            <Link href="/blog" className="text-sm text-accent hover:text-accent-600">All articles →</Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             {ARTICLES_SORTED.slice(0, 3).map((a) => (

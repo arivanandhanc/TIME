@@ -1,6 +1,11 @@
 import type { Metadata, Viewport } from 'next';
+import { Syne, DM_Sans, Space_Mono } from 'next/font/google';
 import './globals.css';
 import { SITE } from '@/lib/site';
+
+const dmSans = DM_Sans({ subsets: ['latin'], display: 'swap', variable: '--font-body' });
+const syne = Syne({ subsets: ['latin'], display: 'swap', weight: ['600', '700', '800'], variable: '--font-display' });
+const spaceMono = Space_Mono({ subsets: ['latin'], display: 'swap', weight: ['400', '700'], variable: '--font-mono' });
 import { websiteSchema } from '@/lib/seo';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -27,22 +32,20 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#1d2635' },
-  ],
+  themeColor: '#0a0a0a',
   width: 'device-width',
   initialScale: 1,
 };
 
 // Runs before paint to prevent a flash of the wrong theme.
+// Dark-first: only opt out of dark when the visitor explicitly chose light.
 const themeScript = `
-(function(){try{var t=localStorage.getItem('theme');var m=window.matchMedia('(prefers-color-scheme:dark)').matches;if(t==='dark'||(!t&&m)){document.documentElement.classList.add('dark');}}catch(e){}})();
+(function(){try{var t=localStorage.getItem('theme');if(t!=='light'){document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();
 `;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${dmSans.variable} ${syne.variable} ${spaceMono.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <JsonLd data={websiteSchema()} />

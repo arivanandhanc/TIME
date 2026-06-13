@@ -36,7 +36,7 @@ function renderBlock(b: Block, i: number) {
     case 'p':
       return <p key={i}>{b.text}</p>;
     case 'quote':
-      return <blockquote key={i} className="border-l-4 border-brand-300 pl-4 italic text-brand-600 dark:text-brand-300">{b.text}</blockquote>;
+      return <blockquote key={i} className="border-l-4 border-brand-300 pl-4 italic text-brand-600 dark:text-brand-400">{b.text}</blockquote>;
     case 'ul':
       return (
         <ul key={i} className="list-disc space-y-1 pl-5">

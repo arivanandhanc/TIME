@@ -122,7 +122,7 @@ export default function OverlapPlanner({
                         cell.working
                           ? h.allWorking
                             ? 'bg-emerald-400 text-white'
-                            : 'bg-brand-400/80 text-white'
+                            : 'bg-accent/85 text-accent-ink'
                           : cell.local < 6 || cell.local >= 22
                             ? 'bg-brand-100 dark:bg-white/[0.03]'
                             : 'bg-brand-50 dark:bg-white/[0.06]',
@@ -140,7 +140,7 @@ export default function OverlapPlanner({
 
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-brand-500">
         <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded bg-emerald-400" /> Everyone {callMode ? 'reachable' : 'available'}</span>
-        <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded bg-brand-400/80" /> {callMode ? 'Reachable' : 'Working hours'}</span>
+        <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded bg-accent/85" /> {callMode ? 'Reachable' : 'Working hours'}</span>
         <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded bg-brand-100 dark:bg-white/10" /> Off / night</span>
         <span>Column headers are UTC hours · cell numbers are each location’s local hour.</span>
       </div>

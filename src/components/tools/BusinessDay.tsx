@@ -49,7 +49,7 @@ export default function BusinessDay() {
       {valid && (
         <div className="grid gap-4 sm:grid-cols-3">
           <div className="card text-center">
-            <p className="text-3xl font-bold text-brand-700 dark:text-brand-200">{business}</p>
+            <p className="text-3xl font-bold text-accent">{business}</p>
             <p className="text-sm text-brand-500">business days</p>
           </div>
           <div className="card text-center">

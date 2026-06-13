@@ -17,10 +17,10 @@ const NAV = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 border-b border-brand-200/60 bg-white/85 backdrop-blur dark:border-white/10 dark:bg-brand-950/85">
-      <div className="container flex h-14 items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <span aria-hidden className="text-lg">🕒</span>
+    <header className="sticky top-0 z-40 border-b border-brand-200/60 bg-white/80 backdrop-blur-md dark:border-white/[0.08] dark:bg-brand-950/80">
+      <div className="container flex h-16 items-center justify-between gap-4">
+        <Link href="/" className="group flex items-center gap-2 font-display text-[15px] font-bold tracking-tight">
+          <span aria-hidden className="grid h-8 w-8 place-items-center rounded-lg bg-accent text-accent-ink transition group-hover:-translate-y-0.5">🕒</span>
           <span className="hidden sm:inline">{SITE.name}</span>
           <span className="sm:hidden">Time Tools</span>
         </Link>

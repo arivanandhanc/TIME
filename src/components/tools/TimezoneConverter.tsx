@@ -95,7 +95,7 @@ export default function TimezoneConverter() {
             </div>
             <div className="sm:border-l sm:border-brand-200 sm:pl-4 dark:sm:border-white/10">
               <p className="text-xs uppercase tracking-wide text-brand-400">{to.city}</p>
-              <p className="text-2xl font-bold text-brand-700 dark:text-brand-200">{formatClock(to.timeZone, instant)}</p>
+              <p className="text-2xl font-bold text-accent">{formatClock(to.timeZone, instant)}</p>
               <p className="text-sm text-brand-500">
                 {formatInZone(to.timeZone, instant, { weekday: 'long', month: 'long', day: 'numeric' })} · {formatOffset(getOffsetMinutes(to.timeZone, instant))}
               </p>

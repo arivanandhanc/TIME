@@ -9,8 +9,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const outDir = join(__dirname, '..', 'public', 'icons');
 mkdirSync(outDir, { recursive: true });
 
-const BG = [66, 96, 137]; // brand-600
-const FG = [255, 255, 255];
+const BG = [10, 10, 10]; // near-black (#0a0a0a)
+const FG = [251, 191, 36]; // amber accent (#fbbf24)
 
 function crc32(buf) {
   let c = ~0;

@@ -33,7 +33,7 @@ export function Breadcrumbs({ items }: { items: { name: string; path: string }[]
             <li key={it.path} className="flex items-center gap-1.5">
               {i > 0 && <span aria-hidden>/</span>}
               {i === items.length - 1 ? (
-                <span className="text-brand-600 dark:text-brand-300">{it.name}</span>
+                <span className="text-brand-700 dark:text-brand-200">{it.name}</span>
               ) : (
                 <Link href={it.path} className="hover:text-brand-700 dark:hover:text-brand-200">
                   {it.name}
@@ -106,7 +106,7 @@ export function RelatedTools({ tools }: { tools: ToolMeta[] }) {
 
 export function Prose({ children }: { children: ReactNode }) {
   return (
-    <div className="space-y-4 text-[15px] leading-relaxed text-brand-700 dark:text-brand-200 [&_h2]:mt-8 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-brand-950 dark:[&_h2]:text-white [&_a]:text-brand-600 [&_a]:underline [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5">
+    <div className="space-y-4 text-[15px] leading-relaxed text-brand-700 dark:text-brand-200 [&_h2]:mt-8 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-brand-950 dark:[&_h2]:text-white [&_a]:text-accent [&_a]:underline [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5">
       {children}
     </div>
   );

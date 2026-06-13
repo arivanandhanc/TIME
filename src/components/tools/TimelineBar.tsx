@@ -37,7 +37,7 @@ export default function TimelineBar({
           className={[
             'h-8 flex-1 border-r border-white/40 text-[9px] leading-8 last:border-r-0 dark:border-black/30',
             c.working
-              ? 'bg-brand-400/80 text-white'
+              ? 'bg-accent/85 text-accent-ink'
               : c.isNight
                 ? 'bg-brand-100 dark:bg-white/[0.03]'
                 : 'bg-brand-50 dark:bg-white/[0.06]',

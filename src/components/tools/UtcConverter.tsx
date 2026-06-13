@@ -76,7 +76,7 @@ export default function UtcConverter() {
             <p className="text-sm text-brand-500">
               {formatInZone('UTC', instant, { dateStyle: 'medium', timeStyle: 'short' })} UTC equals
             </p>
-            <p className="mt-1 text-2xl font-bold text-brand-700 dark:text-brand-200">
+            <p className="mt-1 text-2xl font-bold text-accent">
               {formatInZone(zone.timeZone, instant, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}
             </p>
             <p className="text-sm text-brand-400">in {zone.city} ({formatOffset(getOffsetMinutes(zone.timeZone, instant))})</p>

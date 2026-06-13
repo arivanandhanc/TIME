@@ -16,18 +16,21 @@ export function GET(req: Request) {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: 'linear-gradient(135deg, #ffffff 0%, #eaeef4 100%)',
+          background: 'radial-gradient(1000px 500px at 15% -10%, rgba(251,191,36,0.18), transparent), #0a0a0a',
           padding: '70px',
           fontFamily: 'sans-serif',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', fontSize: 32, color: '#426089', fontWeight: 700 }}>
+        <div style={{ display: 'flex', alignItems: 'center', fontSize: 32, color: '#fbbf24', fontWeight: 700 }}>
           🕒 &nbsp;{SITE.name}
         </div>
-        <div style={{ display: 'flex', fontSize: 64, fontWeight: 800, color: '#1d2635', lineHeight: 1.15, maxWidth: '900px' }}>
+        <div style={{ display: 'flex', fontSize: 64, fontWeight: 800, color: '#f4f4f4', lineHeight: 1.15, maxWidth: '950px' }}>
           {title}
         </div>
-        <div style={{ display: 'flex', fontSize: 30, color: '#557aa4' }}>{SITE.tagline}</div>
+        <div style={{ display: 'flex', alignItems: 'center', fontSize: 28, color: '#b0b0b0' }}>
+          <div style={{ display: 'flex', width: 40, height: 6, background: '#fbbf24', borderRadius: 3, marginRight: 18 }} />
+          {SITE.tagline}
+        </div>
       </div>
     ),
     { width: 1200, height: 630 },

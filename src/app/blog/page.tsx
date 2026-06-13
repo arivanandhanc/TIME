@@ -50,7 +50,7 @@ export default function BlogIndex() {
             </div>
             <h2 className="mt-2 text-lg font-semibold leading-snug">{a.title}</h2>
             <p className="mt-1 text-sm text-brand-500">{a.description}</p>
-            <span className="mt-3 text-sm font-medium text-brand-600 dark:text-brand-300">Read article →</span>
+            <span className="mt-3 text-sm font-medium text-accent">Read article →</span>
           </Link>
         ))}
       </div>
