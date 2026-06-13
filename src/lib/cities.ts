@@ -127,11 +127,60 @@ export const CITIES: City[] = [
 
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
-export function searchCities(query: string, limit = 8): City[] {
+const REGION_FLAGS: Record<string, string> = {
+  Africa: '🌍',
+  America: '🌎',
+  Antarctica: '🧊',
+  Arctic: '❄️',
+  Asia: '🌏',
+  Atlantic: '🌊',
+  Australia: '🇦🇺',
+  Europe: '🇪🇺',
+  Indian: '🌊',
+  Pacific: '🌊',
+  Etc: '🌐',
+};
+
+/** Turn a bare IANA zone (e.g. "America/Argentina/Buenos_Aires") into a City. */
+function deriveCity(zone: string): City {
+  const parts = zone.split('/');
+  const region = parts[0];
+  const name = parts[parts.length - 1].replace(/_/g, ' ');
+  return {
+    city: name,
+    country: region === 'Etc' ? 'UTC offset' : region,
+    countryCode: '',
+    timeZone: zone,
+    flag: REGION_FLAGS[region] ?? '🌐',
+    pop: 0,
+  };
+}
+
+/**
+ * The full searchable set: curated major cities first (rich names, flags,
+ * aliases) plus every standard IANA timezone the runtime supports, so any
+ * timezone on earth can be selected. Computed once, lazily.
+ */
+let _allCities: City[] | null = null;
+export function allCities(): City[] {
+  if (_allCities) return _allCities;
+  let zones: string[] = [];
+  try {
+    zones = (Intl as unknown as { supportedValuesOf?: (k: string) => string[] }).supportedValuesOf?.('timeZone') ?? [];
+  } catch {
+    zones = [];
+  }
+  const have = new Set(CITIES.map((c) => c.timeZone));
+  const extra = zones.filter((z) => !have.has(z)).map(deriveCity);
+  _allCities = [...CITIES, ...extra];
+  return _allCities;
+}
+
+export function searchCities(query: string, limit = 10): City[] {
   const q = norm(query.trim());
   if (!q) return [];
   const scored: { city: City; score: number }[] = [];
-  for (const c of CITIES) {
+  for (const c of allCities()) {
     const name = norm(c.city);
     const country = norm(c.country);
     const tz = norm(c.timeZone.replace(/_/g, ' '));
@@ -144,14 +193,18 @@ export function searchCities(query: string, limit = 8): City[] {
     else if (country.startsWith(q)) score = 400;
     else if (country.includes(q)) score = 300;
     else if (tz.includes(q)) score = 200;
-    if (score >= 0) scored.push({ city: c, score: score + c.pop });
+    if (score >= 0) {
+      // Curated cities (pop > 0 / a country code) rank above derived zones.
+      const curatedBoost = c.countryCode ? 50 : 0;
+      scored.push({ city: c, score: score + c.pop + curatedBoost });
+    }
   }
   scored.sort((a, b) => b.score - a.score);
   return scored.slice(0, limit).map((s) => s.city);
 }
 
 export function cityByZone(timeZone: string): City | undefined {
-  return CITIES.find((c) => c.timeZone === timeZone);
+  return allCities().find((c) => c.timeZone === timeZone);
 }
 
 /** Stable id for a city (used as React keys / saved-state). */
