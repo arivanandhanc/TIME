@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { buildMetadata } from '@/lib/seo';
+import { buildMetadata, itemListSchema } from '@/lib/seo';
 import { SITE, TOOLS, FEATURED_TOOLS } from '@/lib/site';
 import { ARTICLES_SORTED } from '@/lib/blog';
 import HeroSearch from '@/components/HeroSearch';
+import JsonLd from '@/components/JsonLd';
 import { ToolCard } from '@/components/ui';
 
 export const metadata: Metadata = buildMetadata({
@@ -16,6 +17,11 @@ export const metadata: Metadata = buildMetadata({
 export default function HomePage() {
   return (
     <>
+      <JsonLd
+        data={itemListSchema(
+          TOOLS.map((t) => ({ name: t.title, path: `/${t.slug}`, description: t.short })),
+        )}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-brand-100 bg-gradient-to-b from-brand-50/60 to-white dark:border-white/5 dark:from-white/[0.03] dark:to-transparent">
         {/* amber glow */}

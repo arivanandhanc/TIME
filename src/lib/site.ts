@@ -9,6 +9,12 @@ export const SITE = {
   twitter: '@arivanandhan',
   author: 'Arivanandhan',
   themeColor: '#0a0a0a',
+  /** Official brand profiles — drives Organization schema sameAs / Knowledge Graph. */
+  sameAs: [
+    'https://arivanandhan.in',
+    'https://support.arivanandhan.in',
+    'https://twitter.com/arivanandhan',
+  ],
 } as const;
 
 export interface ToolMeta {

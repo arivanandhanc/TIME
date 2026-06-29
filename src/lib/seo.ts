@@ -109,13 +109,74 @@ export function websiteSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': `${SITE.url}/#website`,
     name: SITE.name,
     url: SITE.url,
     description: SITE.description,
+    publisher: { '@id': `${SITE.url}/#organization` },
+    inLanguage: 'en',
     potentialAction: {
       '@type': 'SearchAction',
       target: { '@type': 'EntryPoint', urlTemplate: `${SITE.url}/world-clock?q={search_term_string}` },
       'query-input': 'required name=search_term_string',
     },
+  };
+}
+
+/**
+ * Organization (brand) entity. Gives search engines a stable, linkable identity
+ * for the site — feeds Google's Knowledge Graph and strengthens every other
+ * schema that references it via @id. sameAs lists the brand's official profiles.
+ */
+export function organizationSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE.url}/#organization`,
+    name: SITE.name,
+    alternateName: SITE.shortName,
+    url: SITE.url,
+    description: SITE.description,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE.url}/icon.svg`,
+      contentUrl: `${SITE.url}/icon.svg`,
+    },
+    image: `${SITE.url}/og`,
+    founder: { '@type': 'Person', name: SITE.author },
+    sameAs: SITE.sameAs,
+  };
+}
+
+/**
+ * ItemList of all tools — the collection's "list" representation. Helps Google
+ * understand the full toolset on the homepage and tools index, improving the
+ * odds of rich sitelinks and a richer SERP presence for the brand.
+ */
+export function itemListSchema(items: { name: string; path: string; description?: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `${SITE.name} — Tools`,
+    itemListElement: items.map((it, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: it.name,
+      url: `${SITE.url}${it.path}`,
+      ...(it.description ? { description: it.description } : {}),
+    })),
+  };
+}
+
+/** CollectionPage wrapper for index pages that list many tools/articles. */
+export function collectionPageSchema(name: string, description: string, path: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name,
+    description,
+    url: `${SITE.url}${path}`,
+    isPartOf: { '@id': `${SITE.url}/#website` },
+    inLanguage: 'en',
   };
 }
